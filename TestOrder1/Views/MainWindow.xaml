@@ -18,16 +18,16 @@
                     <DockPanel LastChildFill="False"/>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Добавить">
+            <MenuItem Header="Добавить"  Command="{Binding CreateNewUserCommand}">
             </MenuItem>
-            <MenuItem Header="Изменить">
+            <MenuItem Header="Изменить" Command="{Binding EditUserCommand}" CommandParameter="{Binding selectedUser}">
             </MenuItem>
-            <MenuItem Header="Удалить">
+            <MenuItem Header="Удалить" Command="{Binding DeleteUserCommand}" CommandParameter="{Binding selectedUser}">
             </MenuItem>
         </Menu>
-        <ListBox x:Name="listExperiments" ItemsSource="{Binding PersonList}" SelectedItem="{Binding selectedPerson}" SelectedIndex="0">
+        <ListBox x:Name="listExperiments" ItemsSource="{Binding UserList}" SelectedItem="{Binding selectedUser}" SelectedIndex="0">
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="mg:Person">
+                <DataTemplate DataType="mg:User">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -47,7 +47,7 @@
                         <TextBlock Text="Id: " Grid.Column="0" Grid.Row="0"></TextBlock>
                         <TextBlock Text="{Binding Id}" Grid.Column="1" Grid.Row="0"></TextBlock>
                         <TextBlock Text="Логин: " Grid.Column="0" Grid.Row="1"></TextBlock>
-                        <TextBlock Text="{Binding  Login}" Grid.Column="1" Grid.Row="1"></TextBlock>
+                        <TextBlock Text="{Binding Login}" Grid.Column="1" Grid.Row="1"></TextBlock>
                         <TextBlock Text="Email: " Grid.Column="0" Grid.Row="2"></TextBlock>
                         <TextBlock Text="{Binding Email}" Grid.Column="1" Grid.Row="2"></TextBlock>
                         <TextBlock Text="Номер телефона:" Grid.Column="0" Grid.Row="3"></TextBlock>

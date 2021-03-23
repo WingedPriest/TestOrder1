@@ -14,12 +14,25 @@ IF OBJECT_ID(N'User','U') IS NULL
 [Surname] [NVARCHAR](50) NOT NULL,
 [Name] [NVARCHAR](50) NOT NULL,
 [Patronymic] [NVARCHAR](50) NULL,
-[DateOfCreation] [DATE] DEFAULT GETDATE() NOT NULL,
-[DateOfChange] [DATE] NOT NULL)
+[DateOfCreation] [DATETIME] DEFAULT GETDATE() NOT NULL,
+[DateOfChange] [DATETIME] DEFAULT GETDATE() NOT NULL)
 ELSE
 DELETE FROM [User]
+USE Users
 GO
-CREATE TRIGGER Client_Update
+
+--???---
+CREATE TRIGGER User_Inserted
+ON [dbo].[User]
+AFTER INSERT
+AS 
+BEGIN
+UPDATE dbo.[User] SET dbo.[User].DateOfCreation = GETDATE()
+  FROM INSERTED
+  WHERE inserted.id=[User].id
+END
+GO
+CREATE TRIGGER User_Update
 ON [dbo].[User]
 AFTER UPDATE
 AS 

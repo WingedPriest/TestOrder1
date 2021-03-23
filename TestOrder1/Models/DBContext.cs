@@ -12,6 +12,6 @@ namespace TestOrder1.Models
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-BOBS0F0;Database=Users;Trusted_Connection=True;");//перенести строку подключения в конфиги
         }
 
-        public DbSet<Person> User { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

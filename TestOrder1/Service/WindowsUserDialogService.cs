@@ -15,32 +15,33 @@ namespace TestOrder1.Service
             switch (item)
             {
                 default: throw new NotSupportedException($"Редактирование объекта типа {item.GetType().Name} не поддерживается");
-                case Person person:
-                    return EditPerson(person);
+                case User user:
+                    return EditUser(user);
             }
         }
 
-        private static bool EditPerson(Person person)
+        private static bool EditUser(User user)
         {
             var dlg = new UserEditorWindow
             {
-                Login = person.Name,
-                Email=person.Email,
-                PhoneNumber=person.PhoneNumber,
-                Surname=person.Surname,
-                NameUser=person.Name,
-                Patronymic=person.Patronymic
+                Login = user.Login,
+                Email= user.Email,
+                PhoneNumber= user.PhoneNumber,
+                Surname= user.Surname,
+                NameUser= user.Name,
+                Patronymic= user.Patronymic
             };
             
 
             if (dlg.ShowDialog() != true) return false;
 
-            person.Login = dlg.Login;
-            person.Email = dlg.Email;
-            person.PhoneNumber = dlg.PhoneNumber;
-            person.Surname = dlg.Surname;
-            person.Name = dlg.Name;
-            person.Patronymic = dlg.Patronymic;
+            user.Login = dlg.Login;
+            user.Email = dlg.Email;
+            user.PhoneNumber = dlg.PhoneNumber;
+            user.Surname = dlg.Surname;
+            user.Name = dlg.NameUser;
+            user.Patronymic = dlg.Patronymic;
+            
 
             return true;
         }
