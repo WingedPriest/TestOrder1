@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,7 +17,7 @@ namespace TestOrder1.Views
     /// <summary>
     /// Логика взаимодействия для UserEditorWindow.xaml
     /// </summary>
-    public partial class UserEditorWindow : Window
+    public partial class UserEditorWindow : Window, IDataErrorInfo
     {
 
         #region Login
@@ -89,6 +91,71 @@ namespace TestOrder1.Views
         public string Patronymic { get => (string)GetValue(PatronymicProperty); set => SetValue(PatronymicProperty, value); }
 
         #endregion
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    case "Login":
+                        if ((Login!=null)&&(Login.Length > 50))
+                        {
+                            error = "Слишком большая длинна логина";
+                        }
+                        break;
+                    case "Email":
+                        string patternEmail = @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                                            @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
+                        if ((Email != null) && (Email.Length > 50))
+                        {
+                            error = "Слишком большая длинна адреса электронной почты";
+                        }
+                        if(Email != null) { bool a = Regex.IsMatch(Email, patternEmail, RegexOptions.IgnoreCase); }
+                        if ((Email != null) && (!Regex.IsMatch(Email, patternEmail, RegexOptions.IgnoreCase)))
+                        {
+                            error = "Не верный формат адреса электронной почты";
+                        }
+                        break;
+                    case "Surname":
+                        if ((Surname != null) && (Surname.Length > 50))
+                        {
+                            error = "Слишком большая длинна фамилии";
+                        }
+                        break;
+                    case "PhoneNumber":
+                        string patternPhoneNumber = "^[0-9 ]";
+                        if ((PhoneNumber != null) && (PhoneNumber.Length > 11))
+                        {
+                            error = "Слишком большая длинна номера телефона";
+                        }
+                        if ((PhoneNumber != null) && (!Regex.IsMatch(PhoneNumber, patternPhoneNumber, RegexOptions.IgnoreCase)))
+                        {
+                            error = "Не верный формат номера телефона";
+                        }
+
+                        break;
+                    case "Name":
+                        if ((Name != null) && (Name.Length > 50))
+                        {
+                            error = "Слишком большая длинна имени";
+                        }
+                        break;
+                    case "Patronymic":
+                        if ((Patronymic != null) && (Patronymic.Length > 50))
+                        {
+                            error = "Слишком большая длинна отчества";
+                        }
+                        break;
+                }
+                return error;
+            }
+        }
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public UserEditorWindow()
         {

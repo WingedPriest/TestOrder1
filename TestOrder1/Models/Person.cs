@@ -7,7 +7,7 @@ using TestOrder1.Models.Base;
 
 namespace TestOrder1.Models
 {
-    class User:ModelBase, IDataErrorInfo
+    class User:ModelBase
     {
         #region Идентификатор
 
@@ -98,69 +98,6 @@ namespace TestOrder1.Models
         public DateTime DateOfChange { get => _DateOfChange; set => Set(ref _DateOfChange, value); }
 
         #endregion
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = String.Empty;
-                switch (columnName)
-                {
-                    case "Age":
-                        if (Login.Length > 50) 
-                        {
-                            error = "Слишком большая длинна логина";
-                        }
-                        break;
-                    case "Email":
-                        string patternEmail = @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-                                            @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
-                        if (Email.Length > 50)
-                        {
-                            error = "Слишком большая длинна адреса электронной почты";
-                        }
-                        if (Regex.IsMatch(Email, patternEmail, RegexOptions.IgnoreCase))
-                        {
-                            error = "Не верный формат адреса электронной почты";
-                        }
-                            break;
-                    case "Surname":
-                        if (Surname.Length > 50)
-                        {
-                            error = "Слишком большая длинна фамилии";
-                        }
-                        break;
-                    case "PhoneNumber":
-                        string patternPhoneNumber = "^[0-9 ]";
-                        if (PhoneNumber.Length > 11)
-                        {
-                            error = "Слишком большая длинна номера телефона";
-                        }
-                        if (Regex.IsMatch(PhoneNumber, patternPhoneNumber, RegexOptions.IgnoreCase))
-                        {
-                            error = "Не верный формат номера телефона";
-                        }
-
-                        break;
-                    case "Name":
-                        if (Name.Length > 50)
-                        {
-                            error = "Слишком большая длинна имени";
-                        }
-                        break;
-                    case "Patronymic":
-                        if (Patronymic.Length > 50)
-                        {
-                            error = "Слишком большая длинна отчества";
-                        }
-                        break;
-                }
-                return error;
-            }
-        }
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
+ 
     }
 }

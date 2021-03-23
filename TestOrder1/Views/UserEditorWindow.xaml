@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestOrder1.Views"
+        xmlns:mg="clr-namespace:TestOrder1.Models"
         xmlns:cmd="clr-namespace:TestOrder1.Infrastructure.Commnds"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         mc:Ignorable="d"
+        
         Title="UserEditorWindow" Height="300" Width="350">
+    
     <Grid>
         <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="7" Background="GhostWhite" BorderBrush="Silver" BorderThickness="1" CornerRadius="8,8,3,3" Margin="10">
             <Grid Margin="10">
@@ -23,22 +26,69 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Создание и редактирование пользователя" HorizontalAlignment="Center" FontSize="9" Grid.ColumnSpan="2" Grid.Row="0"></TextBlock>
                 <TextBlock Text="Логин: " Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom"></TextBlock>
-                <TextBox Text="{Binding Login}" Grid.Column="1" Grid.Row="1" Cursor="IBeam"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" Cursor="IBeam" >
+                    <TextBox.Text>
+                        <Binding Path="Login" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Text="Email: " Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom"></TextBlock>
-                <TextBox Text="{Binding Email}" Grid.Column="1" Grid.Row="2"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="2" Cursor="IBeam" >
+                    <TextBox.Text>
+                        <Binding Path="Email" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Text="Номер телефона:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom"></TextBlock>
-                <TextBox Text="{Binding PhoneNumber}" Grid.Column="1" Grid.Row="3"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="3" Cursor="IBeam" >
+                    <TextBox.Text>
+                        <Binding Path="PhoneNumber" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Text="Фамилия: " Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom"></TextBlock>
-                <TextBox Text="{Binding Surname}" Grid.Column="1" Grid.Row="4"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="4" Cursor="IBeam" >
+                    <TextBox.Text>
+                        <Binding Path="Surname" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Text="Имя"  Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom"></TextBlock>
-                <TextBox Text="{Binding NameUser}" Grid.Column="1" Grid.Row="5"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="5" Cursor="IBeam" >
+                    <TextBox.Text>
+                        <Binding Path="NameUser" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock Text="Отчество: " Grid.Column="0" Grid.Row="6" VerticalAlignment="Bottom"></TextBlock>
-                <TextBox Text="{Binding Patronymic}" Grid.Column="1" Grid.Row="6"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="6" Cursor="IBeam" >
+                    <TextBox.Text>
+                        <Binding Path="Patronymic" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                     <Button Content="Сохранить" Width="100" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="5,10,5,0" Cursor="Hand" Background="White" BorderBrush="Black" Foreground="#FF11C506" IsDefault="True"
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=local:UserEditorWindow}}">
