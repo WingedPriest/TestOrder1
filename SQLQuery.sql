@@ -21,7 +21,7 @@ DELETE FROM [User]
 USE Users
 GO
 
---???---
+--Можно сделать настройки даты как на уровне приложения, так и на уровне БД---
 CREATE TRIGGER User_Inserted
 ON [dbo].[User]
 AFTER INSERT
